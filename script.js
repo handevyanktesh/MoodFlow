@@ -46,3 +46,22 @@ li.innerHTML = `
   progressBar.style.width = percent + "%";
   progressBar.innerText = Math.round(percent) + "%";
 }
+
+document.querySelectorAll(".mood-btn").forEach(btn => {
+  btn.onclick = () => {
+    selectedMood = btn.dataset.mood;
+    app.className = selectedMood;
+  };
+});
+
+document.getElementById("addTaskBtn").onclick = () => {
+  const input = document.getElementById("taskInput");
+  if (input.value === "") return;
+
+  tasks.push({ text: input.value, mood: selectedMood, done: false });
+  input.value = "";
+  saveTasks();
+  renderTasks();
+};
+
+renderTasks();
